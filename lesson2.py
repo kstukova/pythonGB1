@@ -69,31 +69,94 @@ print()
 # Task 5
 print("Task 5")
 
-pros = float(input('Введите выручку: ')) # выручка
-cost = float(input('Введите убыток: ')) # издержки
-res = pros - cost # прибыль
+# создаем изначальный лист
+list_4 = [9, 4, 2]
 
-if res > 0:
-    print(f'Фирма получает прибыль. Рентабельность составляет {res / pros:.2f}')
-    n = int(input('Введите количество сотрудников: '))
-    print(f'Прибыль фирмы в расчете на одного сотрудника: {res / n:.2f}')
-else:
-    print(f'Фирма не получает прибыли.')
+# запрашиваем новый элемент у пользователя
+el = input('Введите натуральное число: ')
+
+# проверяем введенное значение
+while isinstance(el, int) is False:
+    if not el.isdigit():
+        print('Вы ввели неправильное значение.')
+        el = input('Попробуйте еще раз. Введите натуральное число: ')
+    elif int(el) <= 0:
+        print('Вы ввели неправильное значение.')
+        el = input('Попробуйте еще раз. Введите натуральное число: ')
+    else:
+        el = int(el)
+        k = len(list_4)  # мерим длину списка
+        if el > list_4[0]:  # сравниваем с началом списка
+            list_4.insert(0, el)
+            print(f'Новый рейтинг: {list_4}')
+            break
+        elif el <= list_4[k - 1]:  # сравниваем с концом списка
+            list_4.append(el)
+            print(f'Новый рейтинг: {list_4}')
+            break
+        else:  # сравниваем со следующим элементом
+            for i in range(k):
+                if el > list_4[i + 1]:
+                    list_4.insert(i + 1, el)
+                    print(f'Новый рейтинг: {list_4}')
+                    break
+
+q = 'Y'
+
+list_keys = ['название:', 'цена:', 'количество:', 'ед.:']
+all_goods = []
+list_names = []
+list_prices = []
+list_amounts = []
+list_units = []
+
+i = 0
+while q != 'N':  # спрашиваем данные, пока пользователь хочет их вводить
+    i += 1
+    list_goods = []  # обнуляем список для нового товара
+
+    name = input('Введите название товара: ')  # запрос названия товара
+    list_goods.append(name)  # добавляем в список товара
+    list_names.append(name)  # добавляем в список имен
+
+    price = input('Введите цену товара: ')  # запрос цены товара
+    while isinstance(price, float) is False:  # проверяем введенную цену
+        if not price.isdecimal():
+            print('Вы ввели неправильное значение.')
+            price = input('Попробуйте еще раз. Введите цену товара: ')
+        else:
+            price = float(price)
+    list_goods.append(price)  # добавляем в список товара
+    list_prices.append(price)  # добавляем в список цен
+
+    amount = input('Введите количество товара: ')  # запрос количества товара
+    while isinstance(amount, float) is False:  # проверяем введенное значение
+        if not amount.isdecimal():
+            print('Вы ввели неправильное значение.')
+            amount = input('Попробуйте еще раз. Введите количество товара: ')
+        else:
+            amount = float(amount)
+    list_goods.append(amount)  # добавляем в список товара
+    list_amounts.append(amount)  # добавляем в список количеств
+
+    unit = input('Введите единицу измерения товара: ')  # запрос ед.измерения
+    list_goods.append(unit)  # добавляем в список товара
+    list_units.append(unit)  # добавляем в список ед.измерения
+
+    dict_goods = dict(zip(list_keys, list_goods))  # создаем словарь со значениями товара
+    tuple_goods = (i, dict_goods)  # создаем кортеж с номером и значениями товара
+    all_goods.append(tuple_goods)  # добавляем кортеж в список
+
+    q = input('Хотите ввести данные еще одного товара? Y/N: ')
 
 print()
-
-# Task 6
-print("Task 6")
-
-a = float(input('Введите результат пробежки в 1-ый день, км: '))
-b = float(input('Введите желаемый результат, км: '))
-
-k = 1
-
-while a < b:
-    a = a + 0.1 * a
-    k = k + 1
-    print(f'{k}-й день: {a:.2f}')
+print('Структура:')
+for n in all_goods:
+    print(n)
 
 print()
-print(f'На {k}-й день спортсмен достигнет результата не менее {b} км')
+list_all = [list_names, list_prices, list_amounts, list_units]
+dict_all = dict(zip(list_keys, list_all))  # создаем словарь аналитики
+print('Аналитика')
+for k in dict_all:
+    print(f'{k} {dict_all[k]}')
