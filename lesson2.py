@@ -79,17 +79,17 @@ else:
     el = int(el)
     k = len(list_4)  # мерим длину списка
     if el > list_4[0]:  # сравниваем с началом списка
-        list_4.insert(0, str(el))
+        list_4.insert(0, el)
         print(f'Новый рейтинг: {list_4}')
 
     elif el <= list_4[k - 1]:  # сравниваем с концом списка
-        list_4.append(str(el))
+        list_4.append(el)
         print(f'Новый рейтинг: {list_4}')
 
     else:  # сравниваем со следующим элементом
         for i in range(k):
             if el > list_4[i + 1]:
-                list_4.insert(i + 1, str(el))
+                list_4.insert(i + 1, el)
                 print(f'Новый рейтинг: {list_4}')
                 break
 
