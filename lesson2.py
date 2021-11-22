@@ -26,7 +26,6 @@ for n in range(1, k, 2):
 
 print('Поменяли элементы: ')
 print(list_2)
-
 print()
 
 # Task 3
